@@ -1,9 +1,12 @@
 # Change Log
 
-## 22.1.0
+## 22.0.2
+
+* Fix `bignumber.js` bundler conflict by removing direct dependency in favor of transitive dependency from `json-bigint`
+
+## 22.0.1
 
 * Fix doc examples with proper formatting
-* Add support for the new `Backups` service
 
 ## 22.0.0
 

@@ -562,14 +562,6 @@ export namespace Models {
          * Database type.
          */
         type: DatabaseType;
-        /**
-         * Database backup policies.
-         */
-        policies: Index[];
-        /**
-         * Database backup archives.
-         */
-        archives: Collection[];
     }
 
     /**
@@ -1298,6 +1290,10 @@ export namespace Models {
          * Default value for attribute when not provided. Cannot be set when attribute is required.
          */
         default?: string;
+        /**
+         * Defines whether this attribute is encrypted or not.
+         */
+        encrypt?: boolean;
     }
 
     /**
@@ -1340,6 +1336,10 @@ export namespace Models {
          * Default value for attribute when not provided. Cannot be set when attribute is required.
          */
         default?: string;
+        /**
+         * Defines whether this attribute is encrypted or not.
+         */
+        encrypt?: boolean;
     }
 
     /**
@@ -1382,6 +1382,10 @@ export namespace Models {
          * Default value for attribute when not provided. Cannot be set when attribute is required.
          */
         default?: string;
+        /**
+         * Defines whether this attribute is encrypted or not.
+         */
+        encrypt?: boolean;
     }
 
     /**
@@ -1424,6 +1428,10 @@ export namespace Models {
          * Default value for attribute when not provided. Cannot be set when attribute is required.
          */
         default?: string;
+        /**
+         * Defines whether this attribute is encrypted or not.
+         */
+        encrypt?: boolean;
     }
 
     /**
@@ -2152,6 +2160,10 @@ export namespace Models {
          * Default value for column when not provided. Cannot be set when column is required.
          */
         default?: string;
+        /**
+         * Defines whether this column is encrypted or not.
+         */
+        encrypt?: boolean;
     }
 
     /**
@@ -2194,6 +2206,10 @@ export namespace Models {
          * Default value for column when not provided. Cannot be set when column is required.
          */
         default?: string;
+        /**
+         * Defines whether this column is encrypted or not.
+         */
+        encrypt?: boolean;
     }
 
     /**
@@ -2236,6 +2252,10 @@ export namespace Models {
          * Default value for column when not provided. Cannot be set when column is required.
          */
         default?: string;
+        /**
+         * Defines whether this column is encrypted or not.
+         */
+        encrypt?: boolean;
     }
 
     /**
@@ -2278,6 +2298,10 @@ export namespace Models {
          * Default value for column when not provided. Cannot be set when column is required.
          */
         default?: string;
+        /**
+         * Defines whether this column is encrypted or not.
+         */
+        encrypt?: boolean;
     }
 
     /**
@@ -4343,201 +4367,5 @@ export namespace Models {
          * Is the target expired.
          */
         expired: boolean;
-    }
-
-    /**
-     * Archive
-     */
-    export type BackupArchive = {
-        /**
-         * Archive ID.
-         */
-        $id: string;
-        /**
-         * Archive creation time in ISO 8601 format.
-         */
-        $createdAt: string;
-        /**
-         * Archive update date in ISO 8601 format.
-         */
-        $updatedAt: string;
-        /**
-         * Archive policy ID.
-         */
-        policyId: string;
-        /**
-         * Archive size in bytes.
-         */
-        size: number;
-        /**
-         * The status of the archive creation. Possible values: pending, processing, uploading, completed, failed.
-         */
-        status: string;
-        /**
-         * The backup start time.
-         */
-        startedAt: string;
-        /**
-         * Migration ID.
-         */
-        migrationId: string;
-        /**
-         * The services that are backed up by this archive.
-         */
-        services: string[];
-        /**
-         * The resources that are backed up by this archive.
-         */
-        resources: string[];
-        /**
-         * The resource ID to backup. Set only if this archive should backup a single resource.
-         */
-        resourceId?: string;
-        /**
-         * The resource type to backup. Set only if this archive should backup a single resource.
-         */
-        resourceType?: string;
-    }
-
-    /**
-     * backup
-     */
-    export type BackupPolicy = {
-        /**
-         * Backup policy ID.
-         */
-        $id: string;
-        /**
-         * Backup policy name.
-         */
-        name: string;
-        /**
-         * Policy creation date in ISO 8601 format.
-         */
-        $createdAt: string;
-        /**
-         * Policy update date in ISO 8601 format.
-         */
-        $updatedAt: string;
-        /**
-         * The services that are backed up by this policy.
-         */
-        services: string[];
-        /**
-         * The resources that are backed up by this policy.
-         */
-        resources: string[];
-        /**
-         * The resource ID to backup. Set only if this policy should backup a single resource.
-         */
-        resourceId?: string;
-        /**
-         * The resource type to backup. Set only if this policy should backup a single resource.
-         */
-        resourceType?: string;
-        /**
-         * How many days to keep the backup before it will be automatically deleted.
-         */
-        retention: number;
-        /**
-         * Policy backup schedule in CRON format.
-         */
-        schedule: string;
-        /**
-         * Is this policy enabled.
-         */
-        enabled: boolean;
-    }
-
-    /**
-     * Restoration
-     */
-    export type BackupRestoration = {
-        /**
-         * Restoration ID.
-         */
-        $id: string;
-        /**
-         * Restoration creation time in ISO 8601 format.
-         */
-        $createdAt: string;
-        /**
-         * Restoration update date in ISO 8601 format.
-         */
-        $updatedAt: string;
-        /**
-         * Backup archive ID.
-         */
-        archiveId: string;
-        /**
-         * Backup policy ID.
-         */
-        policyId: string;
-        /**
-         * The status of the restoration. Possible values: pending, downloading, processing, completed, failed.
-         */
-        status: string;
-        /**
-         * The backup start time.
-         */
-        startedAt: string;
-        /**
-         * Migration ID.
-         */
-        migrationId: string;
-        /**
-         * The services that are backed up by this policy.
-         */
-        services: string[];
-        /**
-         * The resources that are backed up by this policy.
-         */
-        resources: string[];
-        /**
-         * Optional data in key-value object. 
-         */
-        options: string;
-    }
-
-    /**
-     * Backup archive list
-     */
-    export type BackupArchiveList = {
-        /**
-         * Total number of archives that matched your query.
-         */
-        total: number;
-        /**
-         * List of archives.
-         */
-        archives: BackupArchive[];
-    }
-
-    /**
-     * Backup policy list
-     */
-    export type BackupPolicyList = {
-        /**
-         * Total number of policies that matched your query.
-         */
-        total: number;
-        /**
-         * List of policies.
-         */
-        policies: BackupPolicy[];
-    }
-
-    /**
-     * Backup restoration list
-     */
-    export type BackupRestorationList = {
-        /**
-         * Total number of restorations that matched your query.
-         */
-        total: number;
-        /**
-         * List of restorations.
-         */
-        restorations: BackupRestoration[];
     }
 }

@@ -2747,10 +2747,11 @@ export class Databases {
      * @param {boolean} params.required - Is attribute required?
      * @param {string} params.xdefault - Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param {boolean} params.array - Is attribute an array?
+     * @param {boolean} params.encrypt - Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.
      * @throws {AppwriteException}
      * @returns {Promise<Models.AttributeLongtext>}
      */
-    createLongtextAttribute(params: { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean }): Promise<Models.AttributeLongtext>;
+    createLongtextAttribute(params: { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean }): Promise<Models.AttributeLongtext>;
     /**
      * Create a longtext attribute.
      * 
@@ -2761,19 +2762,20 @@ export class Databases {
      * @param {boolean} required - Is attribute required?
      * @param {string} xdefault - Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param {boolean} array - Is attribute an array?
+     * @param {boolean} encrypt - Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.
      * @throws {AppwriteException}
      * @returns {Promise<Models.AttributeLongtext>}
      * @deprecated Use the object parameter style method for a better developer experience.
      */
-    createLongtextAttribute(databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean): Promise<Models.AttributeLongtext>;
+    createLongtextAttribute(databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean): Promise<Models.AttributeLongtext>;
     createLongtextAttribute(
-        paramsOrFirst: { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean } | string,
-        ...rest: [(string)?, (string)?, (boolean)?, (string)?, (boolean)?]    
+        paramsOrFirst: { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean } | string,
+        ...rest: [(string)?, (string)?, (boolean)?, (string)?, (boolean)?, (boolean)?]    
     ): Promise<Models.AttributeLongtext> {
-        let params: { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean };
+        let params: { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean };
         
         if ((paramsOrFirst && typeof paramsOrFirst === 'object' && !Array.isArray(paramsOrFirst))) {
-            params = (paramsOrFirst || {}) as { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean };
+            params = (paramsOrFirst || {}) as { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean };
         } else {
             params = {
                 databaseId: paramsOrFirst as string,
@@ -2781,7 +2783,8 @@ export class Databases {
                 key: rest[1] as string,
                 required: rest[2] as boolean,
                 xdefault: rest[3] as string,
-                array: rest[4] as boolean            
+                array: rest[4] as boolean,
+                encrypt: rest[5] as boolean            
             };
         }
         
@@ -2791,6 +2794,7 @@ export class Databases {
         const required = params.required;
         const xdefault = params.xdefault;
         const array = params.array;
+        const encrypt = params.encrypt;
 
         if (typeof databaseId === 'undefined') {
             throw new AppwriteException('Missing required parameter: "databaseId"');
@@ -2818,6 +2822,9 @@ export class Databases {
         }
         if (typeof array !== 'undefined') {
             payload['array'] = array;
+        }
+        if (typeof encrypt !== 'undefined') {
+            payload['encrypt'] = encrypt;
         }
         const uri = new URL(this.client.config.endpoint + apiPath);
 
@@ -2939,10 +2946,11 @@ export class Databases {
      * @param {boolean} params.required - Is attribute required?
      * @param {string} params.xdefault - Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param {boolean} params.array - Is attribute an array?
+     * @param {boolean} params.encrypt - Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.
      * @throws {AppwriteException}
      * @returns {Promise<Models.AttributeMediumtext>}
      */
-    createMediumtextAttribute(params: { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean }): Promise<Models.AttributeMediumtext>;
+    createMediumtextAttribute(params: { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean }): Promise<Models.AttributeMediumtext>;
     /**
      * Create a mediumtext attribute.
      * 
@@ -2953,19 +2961,20 @@ export class Databases {
      * @param {boolean} required - Is attribute required?
      * @param {string} xdefault - Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param {boolean} array - Is attribute an array?
+     * @param {boolean} encrypt - Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.
      * @throws {AppwriteException}
      * @returns {Promise<Models.AttributeMediumtext>}
      * @deprecated Use the object parameter style method for a better developer experience.
      */
-    createMediumtextAttribute(databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean): Promise<Models.AttributeMediumtext>;
+    createMediumtextAttribute(databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean): Promise<Models.AttributeMediumtext>;
     createMediumtextAttribute(
-        paramsOrFirst: { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean } | string,
-        ...rest: [(string)?, (string)?, (boolean)?, (string)?, (boolean)?]    
+        paramsOrFirst: { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean } | string,
+        ...rest: [(string)?, (string)?, (boolean)?, (string)?, (boolean)?, (boolean)?]    
     ): Promise<Models.AttributeMediumtext> {
-        let params: { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean };
+        let params: { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean };
         
         if ((paramsOrFirst && typeof paramsOrFirst === 'object' && !Array.isArray(paramsOrFirst))) {
-            params = (paramsOrFirst || {}) as { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean };
+            params = (paramsOrFirst || {}) as { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean };
         } else {
             params = {
                 databaseId: paramsOrFirst as string,
@@ -2973,7 +2982,8 @@ export class Databases {
                 key: rest[1] as string,
                 required: rest[2] as boolean,
                 xdefault: rest[3] as string,
-                array: rest[4] as boolean            
+                array: rest[4] as boolean,
+                encrypt: rest[5] as boolean            
             };
         }
         
@@ -2983,6 +2993,7 @@ export class Databases {
         const required = params.required;
         const xdefault = params.xdefault;
         const array = params.array;
+        const encrypt = params.encrypt;
 
         if (typeof databaseId === 'undefined') {
             throw new AppwriteException('Missing required parameter: "databaseId"');
@@ -3010,6 +3021,9 @@ export class Databases {
         }
         if (typeof array !== 'undefined') {
             payload['array'] = array;
+        }
+        if (typeof encrypt !== 'undefined') {
+            payload['encrypt'] = encrypt;
         }
         const uri = new URL(this.client.config.endpoint + apiPath);
 
@@ -3820,10 +3834,11 @@ export class Databases {
      * @param {boolean} params.required - Is attribute required?
      * @param {string} params.xdefault - Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param {boolean} params.array - Is attribute an array?
+     * @param {boolean} params.encrypt - Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.
      * @throws {AppwriteException}
      * @returns {Promise<Models.AttributeText>}
      */
-    createTextAttribute(params: { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean }): Promise<Models.AttributeText>;
+    createTextAttribute(params: { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean }): Promise<Models.AttributeText>;
     /**
      * Create a text attribute.
      * 
@@ -3834,19 +3849,20 @@ export class Databases {
      * @param {boolean} required - Is attribute required?
      * @param {string} xdefault - Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param {boolean} array - Is attribute an array?
+     * @param {boolean} encrypt - Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.
      * @throws {AppwriteException}
      * @returns {Promise<Models.AttributeText>}
      * @deprecated Use the object parameter style method for a better developer experience.
      */
-    createTextAttribute(databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean): Promise<Models.AttributeText>;
+    createTextAttribute(databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean): Promise<Models.AttributeText>;
     createTextAttribute(
-        paramsOrFirst: { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean } | string,
-        ...rest: [(string)?, (string)?, (boolean)?, (string)?, (boolean)?]    
+        paramsOrFirst: { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean } | string,
+        ...rest: [(string)?, (string)?, (boolean)?, (string)?, (boolean)?, (boolean)?]    
     ): Promise<Models.AttributeText> {
-        let params: { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean };
+        let params: { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean };
         
         if ((paramsOrFirst && typeof paramsOrFirst === 'object' && !Array.isArray(paramsOrFirst))) {
-            params = (paramsOrFirst || {}) as { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean };
+            params = (paramsOrFirst || {}) as { databaseId: string, collectionId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean };
         } else {
             params = {
                 databaseId: paramsOrFirst as string,
@@ -3854,7 +3870,8 @@ export class Databases {
                 key: rest[1] as string,
                 required: rest[2] as boolean,
                 xdefault: rest[3] as string,
-                array: rest[4] as boolean            
+                array: rest[4] as boolean,
+                encrypt: rest[5] as boolean            
             };
         }
         
@@ -3864,6 +3881,7 @@ export class Databases {
         const required = params.required;
         const xdefault = params.xdefault;
         const array = params.array;
+        const encrypt = params.encrypt;
 
         if (typeof databaseId === 'undefined') {
             throw new AppwriteException('Missing required parameter: "databaseId"');
@@ -3891,6 +3909,9 @@ export class Databases {
         }
         if (typeof array !== 'undefined') {
             payload['array'] = array;
+        }
+        if (typeof encrypt !== 'undefined') {
+            payload['encrypt'] = encrypt;
         }
         const uri = new URL(this.client.config.endpoint + apiPath);
 
@@ -4207,10 +4228,11 @@ export class Databases {
      * @param {boolean} params.required - Is attribute required?
      * @param {string} params.xdefault - Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param {boolean} params.array - Is attribute an array?
+     * @param {boolean} params.encrypt - Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.
      * @throws {AppwriteException}
      * @returns {Promise<Models.AttributeVarchar>}
      */
-    createVarcharAttribute(params: { databaseId: string, collectionId: string, key: string, size: number, required: boolean, xdefault?: string, array?: boolean }): Promise<Models.AttributeVarchar>;
+    createVarcharAttribute(params: { databaseId: string, collectionId: string, key: string, size: number, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean }): Promise<Models.AttributeVarchar>;
     /**
      * Create a varchar attribute.
      * 
@@ -4222,19 +4244,20 @@ export class Databases {
      * @param {boolean} required - Is attribute required?
      * @param {string} xdefault - Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param {boolean} array - Is attribute an array?
+     * @param {boolean} encrypt - Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.
      * @throws {AppwriteException}
      * @returns {Promise<Models.AttributeVarchar>}
      * @deprecated Use the object parameter style method for a better developer experience.
      */
-    createVarcharAttribute(databaseId: string, collectionId: string, key: string, size: number, required: boolean, xdefault?: string, array?: boolean): Promise<Models.AttributeVarchar>;
+    createVarcharAttribute(databaseId: string, collectionId: string, key: string, size: number, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean): Promise<Models.AttributeVarchar>;
     createVarcharAttribute(
-        paramsOrFirst: { databaseId: string, collectionId: string, key: string, size: number, required: boolean, xdefault?: string, array?: boolean } | string,
-        ...rest: [(string)?, (string)?, (number)?, (boolean)?, (string)?, (boolean)?]    
+        paramsOrFirst: { databaseId: string, collectionId: string, key: string, size: number, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean } | string,
+        ...rest: [(string)?, (string)?, (number)?, (boolean)?, (string)?, (boolean)?, (boolean)?]    
     ): Promise<Models.AttributeVarchar> {
-        let params: { databaseId: string, collectionId: string, key: string, size: number, required: boolean, xdefault?: string, array?: boolean };
+        let params: { databaseId: string, collectionId: string, key: string, size: number, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean };
         
         if ((paramsOrFirst && typeof paramsOrFirst === 'object' && !Array.isArray(paramsOrFirst))) {
-            params = (paramsOrFirst || {}) as { databaseId: string, collectionId: string, key: string, size: number, required: boolean, xdefault?: string, array?: boolean };
+            params = (paramsOrFirst || {}) as { databaseId: string, collectionId: string, key: string, size: number, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean };
         } else {
             params = {
                 databaseId: paramsOrFirst as string,
@@ -4243,7 +4266,8 @@ export class Databases {
                 size: rest[2] as number,
                 required: rest[3] as boolean,
                 xdefault: rest[4] as string,
-                array: rest[5] as boolean            
+                array: rest[5] as boolean,
+                encrypt: rest[6] as boolean            
             };
         }
         
@@ -4254,6 +4278,7 @@ export class Databases {
         const required = params.required;
         const xdefault = params.xdefault;
         const array = params.array;
+        const encrypt = params.encrypt;
 
         if (typeof databaseId === 'undefined') {
             throw new AppwriteException('Missing required parameter: "databaseId"');
@@ -4287,6 +4312,9 @@ export class Databases {
         }
         if (typeof array !== 'undefined') {
             payload['array'] = array;
+        }
+        if (typeof encrypt !== 'undefined') {
+            payload['encrypt'] = encrypt;
         }
         const uri = new URL(this.client.config.endpoint + apiPath);
 
