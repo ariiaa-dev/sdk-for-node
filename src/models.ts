@@ -611,7 +611,7 @@ export namespace Models {
         /**
          * Collection attributes.
          */
-        attributes: (Models.AttributeBoolean | Models.AttributeInteger | Models.AttributeFloat | Models.AttributeEmail | Models.AttributeEnum | Models.AttributeUrl | Models.AttributeIp | Models.AttributeDatetime | Models.AttributeRelationship | Models.AttributePoint | Models.AttributeLine | Models.AttributePolygon | Models.AttributeString)[];
+        attributes: (Models.AttributeBoolean | Models.AttributeInteger | Models.AttributeFloat | Models.AttributeEmail | Models.AttributeEnum | Models.AttributeUrl | Models.AttributeIp | Models.AttributeDatetime | Models.AttributeRelationship | Models.AttributePoint | Models.AttributeLine | Models.AttributePolygon | Models.AttributeVarchar | Models.AttributeText | Models.AttributeMediumtext | Models.AttributeLongtext | Models.AttributeString)[];
         /**
          * Collection indexes.
          */
@@ -637,7 +637,7 @@ export namespace Models {
         /**
          * List of attributes.
          */
-        attributes: (Models.AttributeBoolean | Models.AttributeInteger | Models.AttributeFloat | Models.AttributeEmail | Models.AttributeEnum | Models.AttributeUrl | Models.AttributeIp | Models.AttributeDatetime | Models.AttributeRelationship | Models.AttributePoint | Models.AttributeLine | Models.AttributePolygon | Models.AttributeString)[];
+        attributes: (Models.AttributeBoolean | Models.AttributeInteger | Models.AttributeFloat | Models.AttributeEmail | Models.AttributeEnum | Models.AttributeUrl | Models.AttributeIp | Models.AttributeDatetime | Models.AttributeRelationship | Models.AttributePoint | Models.AttributeLine | Models.AttributePolygon | Models.AttributeVarchar | Models.AttributeText | Models.AttributeMediumtext | Models.AttributeLongtext | Models.AttributeString)[];
     }
 
     /**
@@ -1298,6 +1298,10 @@ export namespace Models {
          * Default value for attribute when not provided. Cannot be set when attribute is required.
          */
         default?: string;
+        /**
+         * Defines whether this attribute is encrypted or not.
+         */
+        encrypt?: boolean;
     }
 
     /**
@@ -1340,6 +1344,10 @@ export namespace Models {
          * Default value for attribute when not provided. Cannot be set when attribute is required.
          */
         default?: string;
+        /**
+         * Defines whether this attribute is encrypted or not.
+         */
+        encrypt?: boolean;
     }
 
     /**
@@ -1382,6 +1390,10 @@ export namespace Models {
          * Default value for attribute when not provided. Cannot be set when attribute is required.
          */
         default?: string;
+        /**
+         * Defines whether this attribute is encrypted or not.
+         */
+        encrypt?: boolean;
     }
 
     /**
@@ -1424,6 +1436,10 @@ export namespace Models {
          * Default value for attribute when not provided. Cannot be set when attribute is required.
          */
         default?: string;
+        /**
+         * Defines whether this attribute is encrypted or not.
+         */
+        encrypt?: boolean;
     }
 
     /**
@@ -2152,6 +2168,10 @@ export namespace Models {
          * Default value for column when not provided. Cannot be set when column is required.
          */
         default?: string;
+        /**
+         * Defines whether this column is encrypted or not.
+         */
+        encrypt?: boolean;
     }
 
     /**
@@ -2194,6 +2214,10 @@ export namespace Models {
          * Default value for column when not provided. Cannot be set when column is required.
          */
         default?: string;
+        /**
+         * Defines whether this column is encrypted or not.
+         */
+        encrypt?: boolean;
     }
 
     /**
@@ -2236,6 +2260,10 @@ export namespace Models {
          * Default value for column when not provided. Cannot be set when column is required.
          */
         default?: string;
+        /**
+         * Defines whether this column is encrypted or not.
+         */
+        encrypt?: boolean;
     }
 
     /**
@@ -2278,6 +2306,10 @@ export namespace Models {
          * Default value for column when not provided. Cannot be set when column is required.
          */
         default?: string;
+        /**
+         * Defines whether this column is encrypted or not.
+         */
+        encrypt?: boolean;
     }
 
     /**
@@ -4346,6 +4378,140 @@ export namespace Models {
     }
 
     /**
+     * ActivityEvent
+     */
+    export type ActivityEvent = {
+        /**
+         * Event ID.
+         */
+        $id: string;
+        /**
+         * User type.
+         */
+        userType: string;
+        /**
+         * User ID.
+         */
+        userId: string;
+        /**
+         * User Email.
+         */
+        userEmail: string;
+        /**
+         * User Name.
+         */
+        userName: string;
+        /**
+         * Resource parent.
+         */
+        resourceParent: string;
+        /**
+         * Resource type.
+         */
+        resourceType: string;
+        /**
+         * Resource ID.
+         */
+        resourceId: string;
+        /**
+         * Resource.
+         */
+        resource: string;
+        /**
+         * Event name.
+         */
+        event: string;
+        /**
+         * User agent.
+         */
+        userAgent: string;
+        /**
+         * IP address.
+         */
+        ip: string;
+        /**
+         * API mode when event triggered.
+         */
+        mode: string;
+        /**
+         * Location.
+         */
+        country: string;
+        /**
+         * Log creation date in ISO 8601 format.
+         */
+        time: string;
+        /**
+         * Project ID.
+         */
+        projectId: string;
+        /**
+         * Team ID.
+         */
+        teamId: string;
+        /**
+         * Hostname.
+         */
+        hostname: string;
+        /**
+         * Operating system code name. View list of [available options](https://github.com/appwrite/appwrite/blob/master/docs/lists/os.json).
+         */
+        osCode: string;
+        /**
+         * Operating system name.
+         */
+        osName: string;
+        /**
+         * Operating system version.
+         */
+        osVersion: string;
+        /**
+         * Client type.
+         */
+        clientType: string;
+        /**
+         * Client code name. View list of [available options](https://github.com/appwrite/appwrite/blob/master/docs/lists/clients.json).
+         */
+        clientCode: string;
+        /**
+         * Client name.
+         */
+        clientName: string;
+        /**
+         * Client version.
+         */
+        clientVersion: string;
+        /**
+         * Client engine name.
+         */
+        clientEngine: string;
+        /**
+         * Client engine name.
+         */
+        clientEngineVersion: string;
+        /**
+         * Device name.
+         */
+        deviceName: string;
+        /**
+         * Device brand name.
+         */
+        deviceBrand: string;
+        /**
+         * Device model name.
+         */
+        deviceModel: string;
+        /**
+         * Country two-character ISO 3166-1 alpha code.
+         */
+        countryCode: string;
+        /**
+         * Country name.
+         */
+        countryName: string;
+    }
+
+    /**
      * Archive
      */
     export type BackupArchive = {
@@ -4497,6 +4663,20 @@ export namespace Models {
          * Optional data in key-value object. 
          */
         options: string;
+    }
+
+    /**
+     * Activity event list
+     */
+    export type ActivityEventList = {
+        /**
+         * Total number of events that matched your query.
+         */
+        total: number;
+        /**
+         * List of events.
+         */
+        events: ActivityEvent[];
     }
 
     /**

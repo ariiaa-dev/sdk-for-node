@@ -47,6 +47,8 @@ export enum Scopes {
     TargetsWrite = 'targets.write',
     RulesRead = 'rules.read',
     RulesWrite = 'rules.write',
+    SchedulesRead = 'schedules.read',
+    SchedulesWrite = 'schedules.write',
     MigrationsRead = 'migrations.read',
     MigrationsWrite = 'migrations.write',
     VcsRead = 'vcs.read',
@@ -62,4 +64,5 @@ export enum Scopes {
     RestorationsWrite = 'restorations.write',
     DomainsRead = 'domains.read',
     DomainsWrite = 'domains.write',
+    EventsRead = 'events.read',
 }

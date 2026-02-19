@@ -6,9 +6,9 @@ const client = new sdk.Client()
     .setProject('<YOUR_PROJECT_ID>') // Your project ID
     .setKey('<YOUR_API_KEY>'); // Your secret API key
 
-const health = new sdk.Health(client);
+const activities = new sdk.Activities(client);
 
-const result = await health.getQueueBillingProjectAggregation({
-    threshold: null // optional
+const result = await activities.listEvents({
+    queries: '' // optional
 });
 ```

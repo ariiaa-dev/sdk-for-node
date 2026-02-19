@@ -2718,10 +2718,11 @@ export class TablesDB {
      * @param {boolean} params.required - Is column required?
      * @param {string} params.xdefault - Default value for column when not provided. Cannot be set when column is required.
      * @param {boolean} params.array - Is column an array?
+     * @param {boolean} params.encrypt - Toggle encryption for the column. Encryption enhances security by not storing any plain text values in the database. However, encrypted columns cannot be queried.
      * @throws {AppwriteException}
      * @returns {Promise<Models.ColumnLongtext>}
      */
-    createLongtextColumn(params: { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean }): Promise<Models.ColumnLongtext>;
+    createLongtextColumn(params: { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean }): Promise<Models.ColumnLongtext>;
     /**
      * Create a longtext column.
      * 
@@ -2732,19 +2733,20 @@ export class TablesDB {
      * @param {boolean} required - Is column required?
      * @param {string} xdefault - Default value for column when not provided. Cannot be set when column is required.
      * @param {boolean} array - Is column an array?
+     * @param {boolean} encrypt - Toggle encryption for the column. Encryption enhances security by not storing any plain text values in the database. However, encrypted columns cannot be queried.
      * @throws {AppwriteException}
      * @returns {Promise<Models.ColumnLongtext>}
      * @deprecated Use the object parameter style method for a better developer experience.
      */
-    createLongtextColumn(databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean): Promise<Models.ColumnLongtext>;
+    createLongtextColumn(databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean): Promise<Models.ColumnLongtext>;
     createLongtextColumn(
-        paramsOrFirst: { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean } | string,
-        ...rest: [(string)?, (string)?, (boolean)?, (string)?, (boolean)?]    
+        paramsOrFirst: { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean } | string,
+        ...rest: [(string)?, (string)?, (boolean)?, (string)?, (boolean)?, (boolean)?]    
     ): Promise<Models.ColumnLongtext> {
-        let params: { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean };
+        let params: { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean };
         
         if ((paramsOrFirst && typeof paramsOrFirst === 'object' && !Array.isArray(paramsOrFirst))) {
-            params = (paramsOrFirst || {}) as { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean };
+            params = (paramsOrFirst || {}) as { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean };
         } else {
             params = {
                 databaseId: paramsOrFirst as string,
@@ -2752,7 +2754,8 @@ export class TablesDB {
                 key: rest[1] as string,
                 required: rest[2] as boolean,
                 xdefault: rest[3] as string,
-                array: rest[4] as boolean            
+                array: rest[4] as boolean,
+                encrypt: rest[5] as boolean            
             };
         }
         
@@ -2762,6 +2765,7 @@ export class TablesDB {
         const required = params.required;
         const xdefault = params.xdefault;
         const array = params.array;
+        const encrypt = params.encrypt;
 
         if (typeof databaseId === 'undefined') {
             throw new AppwriteException('Missing required parameter: "databaseId"');
@@ -2789,6 +2793,9 @@ export class TablesDB {
         }
         if (typeof array !== 'undefined') {
             payload['array'] = array;
+        }
+        if (typeof encrypt !== 'undefined') {
+            payload['encrypt'] = encrypt;
         }
         const uri = new URL(this.client.config.endpoint + apiPath);
 
@@ -2910,10 +2917,11 @@ export class TablesDB {
      * @param {boolean} params.required - Is column required?
      * @param {string} params.xdefault - Default value for column when not provided. Cannot be set when column is required.
      * @param {boolean} params.array - Is column an array?
+     * @param {boolean} params.encrypt - Toggle encryption for the column. Encryption enhances security by not storing any plain text values in the database. However, encrypted columns cannot be queried.
      * @throws {AppwriteException}
      * @returns {Promise<Models.ColumnMediumtext>}
      */
-    createMediumtextColumn(params: { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean }): Promise<Models.ColumnMediumtext>;
+    createMediumtextColumn(params: { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean }): Promise<Models.ColumnMediumtext>;
     /**
      * Create a mediumtext column.
      * 
@@ -2924,19 +2932,20 @@ export class TablesDB {
      * @param {boolean} required - Is column required?
      * @param {string} xdefault - Default value for column when not provided. Cannot be set when column is required.
      * @param {boolean} array - Is column an array?
+     * @param {boolean} encrypt - Toggle encryption for the column. Encryption enhances security by not storing any plain text values in the database. However, encrypted columns cannot be queried.
      * @throws {AppwriteException}
      * @returns {Promise<Models.ColumnMediumtext>}
      * @deprecated Use the object parameter style method for a better developer experience.
      */
-    createMediumtextColumn(databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean): Promise<Models.ColumnMediumtext>;
+    createMediumtextColumn(databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean): Promise<Models.ColumnMediumtext>;
     createMediumtextColumn(
-        paramsOrFirst: { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean } | string,
-        ...rest: [(string)?, (string)?, (boolean)?, (string)?, (boolean)?]    
+        paramsOrFirst: { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean } | string,
+        ...rest: [(string)?, (string)?, (boolean)?, (string)?, (boolean)?, (boolean)?]    
     ): Promise<Models.ColumnMediumtext> {
-        let params: { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean };
+        let params: { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean };
         
         if ((paramsOrFirst && typeof paramsOrFirst === 'object' && !Array.isArray(paramsOrFirst))) {
-            params = (paramsOrFirst || {}) as { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean };
+            params = (paramsOrFirst || {}) as { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean };
         } else {
             params = {
                 databaseId: paramsOrFirst as string,
@@ -2944,7 +2953,8 @@ export class TablesDB {
                 key: rest[1] as string,
                 required: rest[2] as boolean,
                 xdefault: rest[3] as string,
-                array: rest[4] as boolean            
+                array: rest[4] as boolean,
+                encrypt: rest[5] as boolean            
             };
         }
         
@@ -2954,6 +2964,7 @@ export class TablesDB {
         const required = params.required;
         const xdefault = params.xdefault;
         const array = params.array;
+        const encrypt = params.encrypt;
 
         if (typeof databaseId === 'undefined') {
             throw new AppwriteException('Missing required parameter: "databaseId"');
@@ -2981,6 +2992,9 @@ export class TablesDB {
         }
         if (typeof array !== 'undefined') {
             payload['array'] = array;
+        }
+        if (typeof encrypt !== 'undefined') {
+            payload['encrypt'] = encrypt;
         }
         const uri = new URL(this.client.config.endpoint + apiPath);
 
@@ -3786,10 +3800,11 @@ export class TablesDB {
      * @param {boolean} params.required - Is column required?
      * @param {string} params.xdefault - Default value for column when not provided. Cannot be set when column is required.
      * @param {boolean} params.array - Is column an array?
+     * @param {boolean} params.encrypt - Toggle encryption for the column. Encryption enhances security by not storing any plain text values in the database. However, encrypted columns cannot be queried.
      * @throws {AppwriteException}
      * @returns {Promise<Models.ColumnText>}
      */
-    createTextColumn(params: { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean }): Promise<Models.ColumnText>;
+    createTextColumn(params: { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean }): Promise<Models.ColumnText>;
     /**
      * Create a text column.
      * 
@@ -3800,19 +3815,20 @@ export class TablesDB {
      * @param {boolean} required - Is column required?
      * @param {string} xdefault - Default value for column when not provided. Cannot be set when column is required.
      * @param {boolean} array - Is column an array?
+     * @param {boolean} encrypt - Toggle encryption for the column. Encryption enhances security by not storing any plain text values in the database. However, encrypted columns cannot be queried.
      * @throws {AppwriteException}
      * @returns {Promise<Models.ColumnText>}
      * @deprecated Use the object parameter style method for a better developer experience.
      */
-    createTextColumn(databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean): Promise<Models.ColumnText>;
+    createTextColumn(databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean): Promise<Models.ColumnText>;
     createTextColumn(
-        paramsOrFirst: { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean } | string,
-        ...rest: [(string)?, (string)?, (boolean)?, (string)?, (boolean)?]    
+        paramsOrFirst: { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean } | string,
+        ...rest: [(string)?, (string)?, (boolean)?, (string)?, (boolean)?, (boolean)?]    
     ): Promise<Models.ColumnText> {
-        let params: { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean };
+        let params: { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean };
         
         if ((paramsOrFirst && typeof paramsOrFirst === 'object' && !Array.isArray(paramsOrFirst))) {
-            params = (paramsOrFirst || {}) as { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean };
+            params = (paramsOrFirst || {}) as { databaseId: string, tableId: string, key: string, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean };
         } else {
             params = {
                 databaseId: paramsOrFirst as string,
@@ -3820,7 +3836,8 @@ export class TablesDB {
                 key: rest[1] as string,
                 required: rest[2] as boolean,
                 xdefault: rest[3] as string,
-                array: rest[4] as boolean            
+                array: rest[4] as boolean,
+                encrypt: rest[5] as boolean            
             };
         }
         
@@ -3830,6 +3847,7 @@ export class TablesDB {
         const required = params.required;
         const xdefault = params.xdefault;
         const array = params.array;
+        const encrypt = params.encrypt;
 
         if (typeof databaseId === 'undefined') {
             throw new AppwriteException('Missing required parameter: "databaseId"');
@@ -3857,6 +3875,9 @@ export class TablesDB {
         }
         if (typeof array !== 'undefined') {
             payload['array'] = array;
+        }
+        if (typeof encrypt !== 'undefined') {
+            payload['encrypt'] = encrypt;
         }
         const uri = new URL(this.client.config.endpoint + apiPath);
 
@@ -4171,10 +4192,11 @@ export class TablesDB {
      * @param {boolean} params.required - Is column required?
      * @param {string} params.xdefault - Default value for column when not provided. Cannot be set when column is required.
      * @param {boolean} params.array - Is column an array?
+     * @param {boolean} params.encrypt - Toggle encryption for the column. Encryption enhances security by not storing any plain text values in the database. However, encrypted columns cannot be queried.
      * @throws {AppwriteException}
      * @returns {Promise<Models.ColumnVarchar>}
      */
-    createVarcharColumn(params: { databaseId: string, tableId: string, key: string, size: number, required: boolean, xdefault?: string, array?: boolean }): Promise<Models.ColumnVarchar>;
+    createVarcharColumn(params: { databaseId: string, tableId: string, key: string, size: number, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean }): Promise<Models.ColumnVarchar>;
     /**
      * Create a varchar column.
      * 
@@ -4186,19 +4208,20 @@ export class TablesDB {
      * @param {boolean} required - Is column required?
      * @param {string} xdefault - Default value for column when not provided. Cannot be set when column is required.
      * @param {boolean} array - Is column an array?
+     * @param {boolean} encrypt - Toggle encryption for the column. Encryption enhances security by not storing any plain text values in the database. However, encrypted columns cannot be queried.
      * @throws {AppwriteException}
      * @returns {Promise<Models.ColumnVarchar>}
      * @deprecated Use the object parameter style method for a better developer experience.
      */
-    createVarcharColumn(databaseId: string, tableId: string, key: string, size: number, required: boolean, xdefault?: string, array?: boolean): Promise<Models.ColumnVarchar>;
+    createVarcharColumn(databaseId: string, tableId: string, key: string, size: number, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean): Promise<Models.ColumnVarchar>;
     createVarcharColumn(
-        paramsOrFirst: { databaseId: string, tableId: string, key: string, size: number, required: boolean, xdefault?: string, array?: boolean } | string,
-        ...rest: [(string)?, (string)?, (number)?, (boolean)?, (string)?, (boolean)?]    
+        paramsOrFirst: { databaseId: string, tableId: string, key: string, size: number, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean } | string,
+        ...rest: [(string)?, (string)?, (number)?, (boolean)?, (string)?, (boolean)?, (boolean)?]    
     ): Promise<Models.ColumnVarchar> {
-        let params: { databaseId: string, tableId: string, key: string, size: number, required: boolean, xdefault?: string, array?: boolean };
+        let params: { databaseId: string, tableId: string, key: string, size: number, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean };
         
         if ((paramsOrFirst && typeof paramsOrFirst === 'object' && !Array.isArray(paramsOrFirst))) {
-            params = (paramsOrFirst || {}) as { databaseId: string, tableId: string, key: string, size: number, required: boolean, xdefault?: string, array?: boolean };
+            params = (paramsOrFirst || {}) as { databaseId: string, tableId: string, key: string, size: number, required: boolean, xdefault?: string, array?: boolean, encrypt?: boolean };
         } else {
             params = {
                 databaseId: paramsOrFirst as string,
@@ -4207,7 +4230,8 @@ export class TablesDB {
                 size: rest[2] as number,
                 required: rest[3] as boolean,
                 xdefault: rest[4] as string,
-                array: rest[5] as boolean            
+                array: rest[5] as boolean,
+                encrypt: rest[6] as boolean            
             };
         }
         
@@ -4218,6 +4242,7 @@ export class TablesDB {
         const required = params.required;
         const xdefault = params.xdefault;
         const array = params.array;
+        const encrypt = params.encrypt;
 
         if (typeof databaseId === 'undefined') {
             throw new AppwriteException('Missing required parameter: "databaseId"');
@@ -4251,6 +4276,9 @@ export class TablesDB {
         }
         if (typeof array !== 'undefined') {
             payload['array'] = array;
+        }
+        if (typeof encrypt !== 'undefined') {
+            payload['encrypt'] = encrypt;
         }
         const uri = new URL(this.client.config.endpoint + apiPath);
 
