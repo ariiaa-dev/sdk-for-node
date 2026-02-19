@@ -1,5 +1,12 @@
 # Change Log
 
+## 22.1.1
+
+* Removed unused BigNumber import from src/client.ts to clean up dependencies
+* Updated documentation examples to include the new encrypt option for text-like attributes (encrypt: false) across multiple examples
+* Updated README to specify Appwrite server compatibility with 1.8.x
+* Repo cleanup: removed obsolete GitHub workflow and issue template files as part of repository cleanup (non-breaking)
+
 ## 20.3.0
 
 * Add `total` parameter to list queries allowing skipping counting rows in a table for improved performance
