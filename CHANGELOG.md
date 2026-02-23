@@ -1,5 +1,9 @@
 # Change Log
 
+## 22.1.2
+
+* Fix very large double values (for example 1.7976931348623157e+308) from being expanded into giant integer literals
+
 ## 22.1.1
 
 * Removed unused BigNumber import from src/client.ts to clean up dependencies
